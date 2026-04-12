@@ -1,5 +1,74 @@
 import os
 
+ETAPAS_AHORCADO = [
+    """
+  +---+
+      |
+      |
+      |
+      |
+      |
+=========""",
+    """
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========""",
+    """
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========""",
+    """
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========""",
+    """
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========""",
+    """
+  +---+
+  |   |
+  O   |
+ /|\\  |
+      |
+      |
+=========""",
+    """
+  +---+
+  |   |
+  O   |
+ /|\\  |
+ /    |
+      |
+=========""",
+    """
+  +---+
+  |   |
+  O   |
+ /|\\  |
+ / \\  |
+      |
+========="""
+]
+
+MAX_INTENTOS_AHORCADO = len(ETAPAS_AHORCADO) - 1
+
 def limpiar_pantalla():
     os.system("cls" if os.name == "nt" else "clear")
 
@@ -55,6 +124,9 @@ def ejecutar_menu():
         else:
             print("\n  Opción no válida. Intenta de nuevo.")
             presionar_enter()
+
+
+# Juego 2: Ahorcado
 
 
 
