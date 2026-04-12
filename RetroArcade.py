@@ -128,6 +128,23 @@ def ejecutar_menu():
 
 # Juego 2: Ahorcado
 
+def mostrar_estado_ahorcado(intentos_fallidos, letras_usadas, progreso):
+    print(ETAPAS_AHORCADO[intentos_fallidos])
+    print(f"\n  Palabra: {' '.join(progreso)}")
+    print(f"  Letras usadas: {', '.join(sorted(letras_usadas)) if letras_usadas else '-'}")
+    print(f"  Intentos fallidos: {intentos_fallidos}/{MAX_INTENTOS_AHORCADO}\n")
+
+def obtener_letra_usuario(letras_usadas):
+    while True:
+        entrada = input("  Ingresa una letra: ").strip().lower()
+        if len(entrada) == 1 and entrada.isalpha():
+            if entrada in letras_usadas:
+                print("  Ya usaste esa letra. Elige otra.")
+            else:
+                return entrada
+        else:
+            print("  Entrada no válida. Ingresa una sola letra.")
+
 
 
 ejecutar_menu()
