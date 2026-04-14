@@ -45,7 +45,7 @@ ETAPAS_AHORCADO = [
   +---+
   |   |
   O   |
- /|\\  |
+ /|\  |
       |
       |
 =========""",
@@ -53,7 +53,7 @@ ETAPAS_AHORCADO = [
   +---+
   |   |
   O   |
- /|\\  |
+ /|\  |
  /    |
       |
 =========""",
@@ -61,8 +61,8 @@ ETAPAS_AHORCADO = [
   +---+
   |   |
   O   |
- /|\\  |
- / \\  |
+ /|\  |
+ / \  |
       |
 ========="""
 ]
@@ -124,6 +124,22 @@ def ejecutar_menu():
         else:
             print("\n  Opción no válida. Intenta de nuevo.")
             presionar_enter()
+
+
+def jugar_adivina_numero():
+    pass
+
+
+def jugar_ahorcado():
+    pass
+
+
+def jugar_codigo():
+    pass
+
+
+def jugar_revoltijo():
+    pass
 
 
 # Juego 2: Ahorcado
