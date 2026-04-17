@@ -1,6 +1,7 @@
 import os
+import random
 
-ETAPAS_AHORCADO = [
+etapas_ahorcado = [
     """
   +---+
       |
@@ -67,7 +68,37 @@ ETAPAS_AHORCADO = [
 ========="""
 ]
 
-MAX_INTENTOS_AHORCADO = len(ETAPAS_AHORCADO) - 1
+intentos_maximos_ahorcado = len(etapas_ahorcado) - 1
+
+lista_de_palabras = [
+    "barril",
+    "bastón",
+    "casa",
+    "lápiz",
+    "tijeras",
+    "pizza",
+    "torre",
+    "comida",
+    "queso",
+    "ciudad",
+    "neumonoultramicroscopicsilicovolcanoconiosis"
+    "lobo",
+    "gato",
+    "perro",
+    "trebol",
+    "chinchilla",
+    "contendiente",
+    "dictamen",
+    "presidente",
+    "ausente",
+    "ajedrez",
+    "pelota",
+    "ayuda",
+    "idea",
+    "supercalifragilisticoespialidoso",
+    "queso",
+    "ritmo",
+]
 
 def limpiar_pantalla():
     os.system("cls" if os.name == "nt" else "clear")
@@ -139,10 +170,40 @@ def jugar_codigo():
 
 
 def jugar_revoltijo():
-    pass
+    palabra = random.choice(lista_de_palabras)
+    palabra_desordenada = desordenar_palabra(palabra)
+    intentos = 3
+    while intentos > 0:
+        limpiar_pantalla()
+        mostrar_titulo("Revoltijo de Palabras")
+        print(f"{palabra_desordenada}\n")
+        print(f"Intentos restantes: {intentos}")
+        respuesta = input("¡Adivina la palabra!: ")
+        if respuesta == palabra:
+            print("🎊🎉🎈 ¡Felicitaciones, adivinaste la palabra! 🎈🎉🎊")
+            return
+        elif intentos > 1:
+            print("\n❌ Incorrecto, intentalo de nuevo... ❌")
+            input()
+        else:
+            limpiar_pantalla()
+            mostrar_titulo("Revoltijo de Palabras")
+            print(f"{palabra_desordenada}\n")
+            print("Intentos restantes: 0")
+            print(f"¡Adivina la palabra!: {respuesta}")
+            print("\n❌ Incorrecto ❌\n")
+        intentos -= 1
+    print(f"La palabra correcta era: {palabra}")
+    print("Mejor suerte la proxima...")
 
-
-# Juego 2: Ahorcado
+def desordenar_palabra(palabra):
+    lista_temporal = list(palabra)
+    nueva_lista = []
+    while len(lista_temporal) > 0:
+        indice_random = random.randint(0, len(lista_temporal) - 1)
+        letra = lista_temporal.pop(indice_random)
+        nueva_lista.append(letra)
+    return "".join(nueva_lista)
 
 
 
