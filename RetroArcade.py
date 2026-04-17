@@ -100,6 +100,7 @@ lista_de_palabras = [
     "ritmo",
 ]
 
+
 def limpiar_pantalla():
     os.system("cls" if os.name == "nt" else "clear")
 
@@ -174,27 +175,21 @@ def jugar_revoltijo():
     palabra_desordenada = desordenar_palabra(palabra)
     intentos = 3
     while intentos > 0:
-        limpiar_pantalla()
-        mostrar_titulo("Revoltijo de Palabras")
-        print(f"{palabra_desordenada}\n")
-        print(f"Intentos restantes: {intentos}")
+        actualizar_revoltijo(palabra_desordenada, intentos)
         respuesta = input("¡Adivina la palabra!: ")
         if respuesta == palabra:
-            print("🎊🎉🎈 ¡Felicitaciones, adivinaste la palabra! 🎈🎉🎊")
+            print("\n🎊🎉🎈 ¡Felicitaciones, adivinaste la palabra! 🎈🎉🎊")
             return
-        elif intentos > 1:
+        intentos -= 1
+        if intentos > 0:
             print("\n❌ Incorrecto, intentalo de nuevo... ❌")
             input()
-        else:
-            limpiar_pantalla()
-            mostrar_titulo("Revoltijo de Palabras")
-            print(f"{palabra_desordenada}\n")
-            print("Intentos restantes: 0")
-            print(f"¡Adivina la palabra!: {respuesta}")
-            print("\n❌ Incorrecto ❌\n")
-        intentos -= 1
+    actualizar_revoltijo(palabra_desordenada, intentos)
+    print(f"¡Adivina la palabra!: {respuesta}")
+    print("\n❌ Incorrecto ❌\n")
     print(f"La palabra correcta era: {palabra}")
-    print("Mejor suerte la proxima...")
+    print("Mejor suerte la próxima...")
+
 
 def desordenar_palabra(palabra):
     lista_temporal = list(palabra)
@@ -206,5 +201,13 @@ def desordenar_palabra(palabra):
     return "".join(nueva_lista)
 
 
+def actualizar_revoltijo(palabra_desordenada, intentos):
+        limpiar_pantalla()
+        mostrar_titulo("Revoltijo de Palabras")
+        print(f"{palabra_desordenada}\n")
+        print(f"Intentos restantes: {intentos}")
+
+
+# ============================================================================================= #
 
 ejecutar_menu()
