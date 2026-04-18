@@ -101,22 +101,34 @@ lista_de_palabras = [
 ]
 
 
-def limpiar_pantalla():
+def limpiar_pantalla() -> None:
+    """Limpia la consola."""
     os.system("cls" if os.name == "nt" else "clear")
 
 
-def mostrar_titulo(titulo):
+def mostrar_titulo(titulo: str) -> None:
+    """Escribe el título especificado y lo rodea con dos lineas decorativas de símbolos.
+    
+    Argumentos:
+        titulo (str): Texto que se mostrará como título.
+    """
     linea = "=" * 50
     print(f"\n{linea}")
     print(f"   {titulo.upper()}")
     print(f"{linea}\n")
 
 
-def presionar_enter():
+def presionar_enter() -> None:
+    """Indica al usuario que debe presionar Enter para continuar."""
     input("\nPresiona Enter para continuar...")
 
 
-def mostrar_menu_principal():
+def mostrar_menu_principal() -> str:
+    """Muestra la lista de opciones del menu principal.
+
+    Devuelve:
+        str: El texto escrito por el usuario
+    """
     mostrar_titulo("Retro Arcade")
     print("  [1] Adivina el número")
     print("  [2] Ahorcado")
@@ -128,7 +140,8 @@ def mostrar_menu_principal():
     return opcion
 
 
-def ejecutar_menu():
+def ejecutar_menu() -> None:
+    """Inicia y procesa la lógica del Menú Principal."""
     while True:
         limpiar_pantalla()
         opcion = mostrar_menu_principal()
@@ -158,19 +171,23 @@ def ejecutar_menu():
             presionar_enter()
 
 
-def jugar_adivina_numero():
+def jugar_adivina_numero() -> None:
+    """Inicia y procesa la lógica del juego 'Adivina el Número'."""
     pass
 
 
-def jugar_ahorcado():
+def jugar_ahorcado() -> None:
+    """Inicia y procesa la lógica del juego 'Ahorcado'."""
     pass
 
 
-def jugar_codigo():
+def jugar_codigo() -> None:
+    """Inicia y procesa la lógica del juego 'Código'."""
     pass
 
 
-def jugar_revoltijo():
+def jugar_revoltijo() -> None:
+    """Inicia y procesa la lógica del juego 'Revoltijo de Palabras'."""
     palabra = random.choice(lista_de_palabras)
     palabra_desordenada = desordenar_palabra(palabra)
     intentos = 3
@@ -191,7 +208,15 @@ def jugar_revoltijo():
     print("Mejor suerte la próxima...")
 
 
-def desordenar_palabra(palabra):
+def desordenar_palabra(palabra: str) -> str:
+    """Desordena las letras de una palabra.
+
+    Argumentos:
+        palabra (str): Palabra por desordenar.
+    
+    Devuelve:
+        str: La palabra desordenada.
+    """
     lista_temporal = list(palabra)
     nueva_lista = []
     while len(lista_temporal) > 0:
@@ -201,13 +226,21 @@ def desordenar_palabra(palabra):
     return "".join(nueva_lista)
 
 
-def actualizar_revoltijo(palabra_desordenada, intentos):
-        limpiar_pantalla()
-        mostrar_titulo("Revoltijo de Palabras")
-        print(f"{palabra_desordenada}\n")
-        print(f"Intentos restantes: {intentos}")
+def actualizar_revoltijo(palabra_desordenada: str, intentos: str) -> None:
+    """Limpia la consola y reescribe: el título, la palabra desordenada y los intentos restantes del juego 'Revoltijo de Palabras'.
+    
+    Argumentos:
+        palabra_desordenada (str): Palabra desordenada por reescribir.
+        
+        intentos (str): Número de intentos al momento de reescribir.
+    """
+    limpiar_pantalla()
+    mostrar_titulo("Revoltijo de Palabras")
+    print(f"{palabra_desordenada}\n")
+    print(f"Intentos restantes: {intentos}")
 
 
 # ============================================================================================= #
+
 
 ejecutar_menu()
