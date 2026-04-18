@@ -1,6 +1,7 @@
 import os
+import random
 
-ETAPAS_AHORCADO = [
+etapas_ahorcado = [
     """
   +---+
       |
@@ -45,7 +46,7 @@ ETAPAS_AHORCADO = [
   +---+
   |   |
   O   |
- /|\\  |
+ /|\  |
       |
       |
 =========""",
@@ -53,7 +54,7 @@ ETAPAS_AHORCADO = [
   +---+
   |   |
   O   |
- /|\\  |
+ /|\  |
  /    |
       |
 =========""",
@@ -61,30 +62,73 @@ ETAPAS_AHORCADO = [
   +---+
   |   |
   O   |
- /|\\  |
- / \\  |
+ /|\  |
+ / \  |
       |
 ========="""
 ]
 
-MAX_INTENTOS_AHORCADO = len(ETAPAS_AHORCADO) - 1
+intentos_maximos_ahorcado = len(etapas_ahorcado) - 1
 
-def limpiar_pantalla():
+lista_de_palabras = [
+    "barril",
+    "bastón",
+    "casa",
+    "lápiz",
+    "tijeras",
+    "pizza",
+    "torre",
+    "comida",
+    "queso",
+    "ciudad",
+    "neumonoultramicroscopicsilicovolcanoconiosis"
+    "lobo",
+    "gato",
+    "perro",
+    "trebol",
+    "chinchilla",
+    "contendiente",
+    "dictamen",
+    "presidente",
+    "ausente",
+    "ajedrez",
+    "pelota",
+    "ayuda",
+    "idea",
+    "supercalifragilisticoespialidoso",
+    "queso",
+    "ritmo",
+]
+
+
+def limpiar_pantalla() -> None:
+    """Limpia la consola."""
     os.system("cls" if os.name == "nt" else "clear")
 
 
-def mostrar_titulo(titulo):
+def mostrar_titulo(titulo: str) -> None:
+    """Escribe el título especificado y lo rodea con dos lineas decorativas de símbolos.
+    
+    Argumentos:
+        titulo (str): Texto que se mostrará como título.
+    """
     linea = "=" * 50
     print(f"\n{linea}")
     print(f"   {titulo.upper()}")
     print(f"{linea}\n")
 
 
-def presionar_enter():
+def presionar_enter() -> None:
+    """Indica al usuario que debe presionar Enter para continuar."""
     input("\nPresiona Enter para continuar...")
 
 
-def mostrar_menu_principal():
+def mostrar_menu_principal() -> str:
+    """Muestra la lista de opciones del menu principal.
+
+    Devuelve:
+        str: El texto escrito por el usuario
+    """
     mostrar_titulo("Retro Arcade")
     print("  [1] Adivina el número")
     print("  [2] Ahorcado")
@@ -96,7 +140,8 @@ def mostrar_menu_principal():
     return opcion
 
 
-def ejecutar_menu():
+def ejecutar_menu() -> None:
+    """Inicia y procesa la lógica del Menú Principal."""
     while True:
         limpiar_pantalla()
         opcion = mostrar_menu_principal()
@@ -126,7 +171,9 @@ def ejecutar_menu():
             presionar_enter()
 
 
-# Juego 2: Ahorcado
+def jugar_adivina_numero() -> None:
+    """Inicia y procesa la lógica del juego 'Adivina el Número'."""
+    pass
 
 def mostrar_estado_ahorcado(intentos_fallidos, letras_usadas, progreso):
     print(ETAPAS_AHORCADO[intentos_fallidos])
@@ -145,6 +192,72 @@ def obtener_letra_usuario(letras_usadas):
         else:
             print("  Entrada no válida. Ingresa una sola letra.")
 
+
+def jugar_ahorcado() -> None:
+    """Inicia y procesa la lógica del juego 'Ahorcado'."""
+    pass
+
+
+def jugar_codigo() -> None:
+    """Inicia y procesa la lógica del juego 'Código'."""
+    pass
+
+
+def jugar_revoltijo() -> None:
+    """Inicia y procesa la lógica del juego 'Revoltijo de Palabras'."""
+    palabra = random.choice(lista_de_palabras)
+    palabra_desordenada = desordenar_palabra(palabra)
+    intentos = 3
+    while intentos > 0:
+        actualizar_revoltijo(palabra_desordenada, intentos)
+        respuesta = input("¡Adivina la palabra!: ")
+        if respuesta == palabra:
+            print("\n🎊🎉🎈 ¡Felicitaciones, adivinaste la palabra! 🎈🎉🎊")
+            return
+        intentos -= 1
+        if intentos > 0:
+            print("\n❌ Incorrecto, intentalo de nuevo... ❌")
+            input()
+    actualizar_revoltijo(palabra_desordenada, intentos)
+    print(f"¡Adivina la palabra!: {respuesta}")
+    print("\n❌ Incorrecto ❌\n")
+    print(f"La palabra correcta era: {palabra}")
+    print("Mejor suerte la próxima...")
+
+
+def desordenar_palabra(palabra: str) -> str:
+    """Desordena las letras de una palabra.
+
+    Argumentos:
+        palabra (str): Palabra por desordenar.
+    
+    Devuelve:
+        str: La palabra desordenada.
+    """
+    lista_temporal = list(palabra)
+    nueva_lista = []
+    while len(lista_temporal) > 0:
+        indice_random = random.randint(0, len(lista_temporal) - 1)
+        letra = lista_temporal.pop(indice_random)
+        nueva_lista.append(letra)
+    return "".join(nueva_lista)
+
+
+def actualizar_revoltijo(palabra_desordenada: str, intentos: str) -> None:
+    """Limpia la consola y reescribe: el título, la palabra desordenada y los intentos restantes del juego 'Revoltijo de Palabras'.
+    
+    Argumentos:
+        palabra_desordenada (str): Palabra desordenada por reescribir.
+        
+        intentos (str): Número de intentos al momento de reescribir.
+    """
+    limpiar_pantalla()
+    mostrar_titulo("Revoltijo de Palabras")
+    print(f"{palabra_desordenada}\n")
+    print(f"Intentos restantes: {intentos}")
+
+
+# ============================================================================================= #
 
 
 ejecutar_menu()
