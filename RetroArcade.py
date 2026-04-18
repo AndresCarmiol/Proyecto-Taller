@@ -1,7 +1,7 @@
 import os
 import random
 
-etapas_ahorcado = [
+ETAPAS_AHORCADO = [
     """
   +---+
       |
@@ -68,7 +68,17 @@ etapas_ahorcado = [
 ========="""
 ]
 
-intentos_maximos_ahorcado = len(etapas_ahorcado) - 1
+PALABRAS = [
+    "python", "computadora", "programa", "teclado", "monitor",
+    "algoritmo", "variable", "funcion", "bucle", "lista",
+    "diccionario", "cadena", "entero", "flotante", "logico",
+    "modulo", "clase", "objeto", "metodo", "herencia",
+    "recursion", "compilador", "interprete", "memoria", "proceso",
+    "archivo", "sistema", "red", "internet", "servidor",
+    "cliente", "base", "dato", "tabla", "consulta"
+    ]
+
+MAX_INTENTOS_AHORCADO = len(ETAPAS_AHORCADO) - 1  # 7 partes del cuerpo
 
 lista_de_palabras = [
     "barril",
@@ -176,12 +186,30 @@ def jugar_adivina_numero() -> None:
     pass
 
 def mostrar_estado_ahorcado(intentos_fallidos, letras_usadas, progreso):
+    """
+    Muestra el estado actual del juego de ahorcado.
+
+    Args:
+        intentos_fallidos (int): Cantidad de fallos acumulados.
+        letras_usadas (list): Lista de letras ya usadas por el jugador.
+        progreso (list): Lista de caracteres con letras adivinadas y guiones.
+    """
     print(ETAPAS_AHORCADO[intentos_fallidos])
     print(f"\n  Palabra: {' '.join(progreso)}")
     print(f"  Letras usadas: {', '.join(sorted(letras_usadas)) if letras_usadas else '-'}")
     print(f"  Intentos fallidos: {intentos_fallidos}/{MAX_INTENTOS_AHORCADO}\n")
 
+
 def obtener_letra_usuario(letras_usadas):
+    """
+    Solicita y valida una letra al usuario (A-Z, ignora mayúsculas).
+
+    Args:
+        letras_usadas (list): Letras ya ingresadas para evitar repeticiones.
+
+    Returns:
+        str: Letra válida y no repetida ingresada por el usuario.
+    """
     while True:
         entrada = input("  Ingresa una letra: ").strip().lower()
         if len(entrada) == 1 and entrada.isalpha():
@@ -193,9 +221,51 @@ def obtener_letra_usuario(letras_usadas):
             print("  Entrada no válida. Ingresa una sola letra.")
 
 
-def jugar_ahorcado() -> None:
-    """Inicia y procesa la lógica del juego 'Ahorcado'."""
-    pass
+def jugar_ahorcado():
+    """
+    Juego 'Ahorcado'.
+
+    El programa elige una palabra aleatoria. El jugador adivina letra por letra.
+    Dispone de MAX_INTENTOS_AHORCADO fallos antes de perder.
+    Al terminar se revela la palabra si no fue adivinada.
+    """
+    mostrar_titulo("Ahorcado")
+    palabra_secreta = random.choice(PALABRAS)
+    progreso = ["_"] * len(palabra_secreta)
+    letras_usadas = []
+    intentos_fallidos = 0
+    gano = False
+
+    print(f"  La palabra tiene {len(palabra_secreta)} letras.\n")
+
+    while intentos_fallidos < MAX_INTENTOS_AHORCADO:
+        mostrar_estado_ahorcado(intentos_fallidos, letras_usadas, progreso)
+
+        if "_" not in progreso:
+            gano = True
+            break
+
+        letra = obtener_letra_usuario(letras_usadas)
+        letras_usadas.append(letra)
+
+        if letra in palabra_secreta:
+            for i, caracter in enumerate(palabra_secreta):
+                if caracter == letra:
+                    progreso[i] = letra
+            print(f"  ✓ ¡Correcto! La letra '{letra}' está en la palabra.\n")
+        else:
+            intentos_fallidos += 1
+            print(f"  ✗ La letra '{letra}' no está en la palabra.\n")
+
+    # Verificar si ganó después del último intento
+    if "_" not in progreso:
+        gano = True
+
+    if gano:
+        print(f"\n  ¡Ganaste! La palabra era: {palabra_secreta}")
+    else:
+        print(ETAPAS_AHORCADO[MAX_INTENTOS_AHORCADO])
+        print(f"\n  ¡Perdiste! La palabra era: {palabra_secreta}")
 
 
 def jugar_codigo() -> None:
