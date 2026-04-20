@@ -310,7 +310,7 @@ def jugar_adivinar_numero():
 
 # === JUEGO AHORCADO === #
 
-def mostrar_estado_ahorcado(intentos_fallidos: int, letras_usadas: list, progreso: list, palabra_secreta: list) -> None:
+def mostrar_estado_ahorcado(intentos_fallidos: int, letras_usadas: list, progreso: list, palabra_secreta: str) -> None:
     """Muestra el estado actual del juego de ahorcado.
 
     Argumentos:
@@ -320,7 +320,7 @@ def mostrar_estado_ahorcado(intentos_fallidos: int, letras_usadas: list, progres
 
         progreso (list): Lista de caracteres con letras adivinadas y guiones.
 
-        palabra_secreta (list): Lista de caracteres que forman la palabra secreta.
+        palabra_secreta (str): Cadena de caracteres que representa la palabra secreta.
     """
     limpiar()
     mostrar_titulo("Ahorcado")
