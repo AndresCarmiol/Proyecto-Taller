@@ -310,8 +310,6 @@ def menu_juego_adivinar():
     else:
         print('No es un valor valido')
 
-# === JUEGO AHORCADO === #
-
 def mostrar_estado_ahorcado(intentos_fallidos: int, letras_usadas: list, progreso: list, palabra_secreta: list) -> None:
     """Muestra el estado actual del juego de ahorcado.
 
