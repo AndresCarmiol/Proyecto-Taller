@@ -234,8 +234,8 @@ def mostrar_estado_ahorcado(intentos_fallidos: int, letras_usadas: list, progres
 def reinicio():
     global numero_secreto, numeros_incorrectos, intentos
     numero_secreto =  random.randint(0, 101)
-        numeros_incorrectos = []
-        intentos = 6
+    numeros_incorrectos = []
+    intentos = 6
 
     def numero_es_incorrecto():
        global numero
