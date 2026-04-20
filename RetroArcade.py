@@ -216,7 +216,7 @@ def ejecutar_menu() -> None:
 
 def reinicio():
     global numero_secreto, numeros_incorrectos, intentos
-    numero_secreto =  random.randint(0, 101)
+    numero_secreto =  random.randint(1, 101)
     numeros_incorrectos = []
     intentos = 6
 
