@@ -142,7 +142,7 @@ PALABRAS_REVOLTIJO = [
 ]
 
 
-def limpiar_pantalla() -> None:
+def limpiar() -> None:
     """Limpia la consola."""
     os.system("cls" if os.name == "nt" else "clear")
 
@@ -184,27 +184,27 @@ def mostrar_menu_principal() -> str:
 def ejecutar_menu() -> None:
     """Inicia y procesa la lógica del Menú Principal."""
     while True:
-        limpiar_pantalla()
+        limpiar()
         opcion = mostrar_menu_principal()
 
         if opcion == "1":
-            limpiar_pantalla()
+            limpiar()
             jugar_adivina_numero()
             presionar_enter()
         elif opcion == "2":
-            limpiar_pantalla()
+            limpiar()
             jugar_ahorcado()
             presionar_enter()
         elif opcion == "3":
-            limpiar_pantalla()
+            limpiar()
             jugar_codigo()
             presionar_enter()
         elif opcion == "4":
-            limpiar_pantalla()
+            limpiar()
             jugar_revoltijo()
             presionar_enter()
         elif opcion == "5":
-            limpiar_pantalla()
+            limpiar()
             print("\n  ¡Hasta luego! Gracias por jugar Retro Arcade.\n")
             break
         else:
@@ -333,7 +333,7 @@ def mostrar_estado_ahorcado(intentos_fallidos, letras_usadas, progreso):
 
         palabra_secreta (list): Lista de caracteres que forman la palabra secreta.
     """
-    limpiar_pantalla()
+    limpiar()
     mostrar_titulo("Ahorcado")
     print(f"  La palabra tiene {len(palabra_secreta)} letras.\n")
     print(ETAPAS_AHORCADO[intentos_fallidos])
@@ -506,7 +506,7 @@ def actualizar_revoltijo(palabra_desordenada: str, intentos: str) -> None:
         
         intentos (str): Número de intentos al momento de reescribir.
     """
-    limpiar_pantalla()
+    limpiar()
     mostrar_titulo("Revoltijo de Palabras")
     print(f"{palabra_desordenada}\n")
     print(f"Intentos restantes: {intentos}")
