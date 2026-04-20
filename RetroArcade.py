@@ -46,7 +46,7 @@ ETAPAS_AHORCADO = [
   +---+
   |   |
   O   |
- /|\  |
+ /|\\  |
       |
       |
 =========""",
@@ -54,7 +54,7 @@ ETAPAS_AHORCADO = [
   +---+
   |   |
   O   |
- /|\  |
+ /|\\  |
  /    |
       |
 =========""",
@@ -62,8 +62,8 @@ ETAPAS_AHORCADO = [
   +---+
   |   |
   O   |
- /|\  |
- / \  |
+ /|\\  |
+ / \\  |
       |
 ========="""
 ]
@@ -413,12 +413,10 @@ def reinicio():
 
 # === JUEGO AHORCADO === #
 
-def mostrar_estado_ahorcado(intentos_fallidos, letras_usadas, progreso):
+def mostrar_estado_ahorcado(intentos_fallidos, letras_usadas, progreso, palabra_secreta):
     """
     Muestra el estado actual del juego de ahorcado.
     Args:
-=======
->>>>>>> 8d9f5bbb978e258a71ff666b83c1756898d04c8a
         intentos_fallidos (int): Cantidad de fallos acumulados.
 
         letras_usadas (list): Lista de letras ya usadas por el jugador.
