@@ -46,7 +46,7 @@ ETAPAS_AHORCADO = [
   +---+
   |   |
   O   |
- /|\\  |
+ /|\\ |
       |
       |
 =========""",
@@ -108,14 +108,10 @@ PALABRAS_AHORCADO = [
 
 MAX_INTENTOS_AHORCADO = len(ETAPAS_AHORCADO) - 1  # 7 partes del cuerpo
 
-<<<<<<< Updated upstream
-PALABRAS_REVOLTIJO = [
-=======
 LONGITUD_CODIGO = 4
 MAX_INTENTOS_CODIGO = 7
 
-lista_de_palabras = [
->>>>>>> Stashed changes
+PALABRAS_REVOLTIJO = [
     "barril",
     "bastón",
     "casa",
