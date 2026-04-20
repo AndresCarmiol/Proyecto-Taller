@@ -46,7 +46,7 @@ ETAPAS_AHORCADO = [
   +---+
   |   |
   O   |
- /|\  |
+ /|\\  |
       |
       |
 =========""",
@@ -54,7 +54,7 @@ ETAPAS_AHORCADO = [
   +---+
   |   |
   O   |
- /|\  |
+ /|\\ |
  /    |
       |
 =========""",
@@ -62,8 +62,8 @@ ETAPAS_AHORCADO = [
   +---+
   |   |
   O   |
- /|\  |
- / \  |
+ /|\\  |
+ / \\  |
       |
 ========="""
 ]
@@ -108,7 +108,14 @@ PALABRAS_AHORCADO = [
 
 MAX_INTENTOS_AHORCADO = len(ETAPAS_AHORCADO) - 1  # 7 partes del cuerpo
 
+<<<<<<< Updated upstream
 PALABRAS_REVOLTIJO = [
+=======
+LONGITUD_CODIGO = 4
+MAX_INTENTOS_CODIGO = 7
+
+lista_de_palabras = [
+>>>>>>> Stashed changes
     "barril",
     "bastón",
     "casa",
@@ -209,6 +216,9 @@ def ejecutar_menu() -> None:
             presionar_enter()
 
 
+
+# === JUEGO ADIVINA EL NUMERO === #
+
 def jugar_adivina_numero() -> None:
     """Inicia y procesa la lógica del juego 'Adivina el Número'."""
     pass
@@ -217,7 +227,105 @@ def jugar_adivina_numero() -> None:
 def mostrar_estado_ahorcado(intentos_fallidos: int, letras_usadas: list, progreso: list, palabra_secreta: list) -> None:
     """Muestra el estado actual del juego de ahorcado.
 
+<<<<<<< Updated upstream
     Argumentos:
+=======
+    def reinicio():
+        global numero_secreto, numeros_incorrectos, intentos
+        numero_secreto =  random.randint(0, 101)
+        numeros_incorrectos = []
+        intentos = 6
+
+    def numero_es_incorrecto():
+       global numero
+       global intentos
+       if numero > 100 or numero < 0:
+            print('\n-El valor del número está entre 0 y 100-\n')
+            input('-Pulse ENTER para volver a adivinar-')
+            return adivinar()
+       if numero not in numeros_incorrectos:
+            if numero <= 100:
+                if numero < numero_secreto:
+                    print('Más alto')
+                elif numero > numero_secreto:
+                    print('Más bajo')
+                print(f'El {numero} no es el número secreto\n')
+                intentos -= 1
+                numeros_incorrectos.append(numero)
+                input('-Pulsa ENTER para volver a adivinar\n')
+                return adivinar()
+       else:
+             print('\nYa intentaste ese valor.\n')
+             input('-Pulsa enter para volver a adivinar-')
+             return adivinar()
+    def sin_intentos():
+        global intentos
+        if intentos == 0:
+            limpiar()
+            print('==================================================\n            Te quedaste sin intentos.\n                   PERDISTE\n==================================================')
+            print('\n¿Qué vas a hacer ahora?\n[1]. Volver a intentarlo.\n[2]. Salir.')
+            opcion = input('Respuesta: ')
+            if opcion == '1':
+                limpiar()
+                reinicio()
+                return adivinar()
+            elif opcion == '2':
+                limpiar()
+                reinicio()
+                mostrar_menu_principal()
+            else:
+                print('No es una opcion valida.')
+    def adivinar():
+        limpiar()
+        global numero
+        print(f'==================================================\nErróneos: {numeros_incorrectos}\nIntentos: {intentos}\n==================================================')
+        if intentos == 0:
+             sin_intentos()
+        numero = int(input('\nDigite un número: '))
+        if numero == numero_secreto:
+            limpiar()
+            print(f'Felicidades acertaste el número.\nNúmero secreto: {numero_secreto}')
+            print('\n¿Qué vas a hacer ahora?\n[1]. Volver a intentarlo.\n[2]. Salir.')
+            opcion = input('Respuesta: ')
+            if opcion == '1':
+                limpiar()
+                reinicio()
+                return adivinar()
+            elif opcion == '2':
+                limpiar()
+                reinicio()
+                mostrar_menu_principal()
+            else:
+                print('No es una opcion valida.')
+        else:
+             numero_es_incorrecto()
+    def menu_juego_adivinar():
+        limpiar()
+        print('==================================================\n                ADIVINAR EL NÚMERO\n==================================================')
+        print('¡Hola!👋 Vienvenido al mini-juego "Adivinar el número". \nEl juego consiste en intentar adivinar un números en determinados intentos.')
+        print('El número puede estar entre el 0 al 100.')
+        print('\n¿Listo para comenzar?\n[1]. Comenzar\n[2]. salir')
+        opcion = int(input('Respuesta: '))
+        if opcion == 1:
+            limpiar()
+            adivinar()
+        elif opcion == 2:
+            limpiar()
+            reinicio()
+            mostrar_menu_principal()
+        else:
+            print('No es un valor valido')
+
+
+
+# === JUEGO AHORCADO === #
+
+def mostrar_estado_ahorcado(intentos_fallidos, letras_usadas, progreso):
+    """
+    Muestra el estado actual del juego de ahorcado.
+
+    Args:
+>>>>>>> Stashed changes
         intentos_fallidos (int): Cantidad de fallos acumulados.
 
         letras_usadas (list): Lista de letras ya usadas por el jugador.
@@ -298,12 +406,60 @@ def jugar_ahorcado() -> None:
         print(f"\n  ¡Perdiste! La palabra era: {palabra_secreta}")
 
 
-def jugar_codigo() -> None:
-    """Inicia y procesa la lógica del juego 'Código'."""
+
+# === JUEGO CODIGO === # 
+
+def jugar_codigo():
     pass
 
+def generar_codigo_secreto():
+    """
+    Genera un código secreto de LONGITUD_CODIGO dígitos aleatorios (0-9).
 
-def jugar_revoltijo() -> None:
+    Returns:
+        list: Lista de enteros que representan el código secreto.
+    """
+    return [random.randint(0, 9) for _ in range(LONGITUD_CODIGO)]
+
+def obtener_codigo_usuario():
+    """
+    Solicita y valida un código de LONGITUD_CODIGO dígitos al usuario.
+    Repite la solicitud hasta recibir una entrada válida.
+
+    Returns:
+        list: Lista de enteros ingresados por el usuario.
+    """
+    while True:
+        entrada = input(f"  Ingresa un código de {LONGITUD_CODIGO} dígitos (ej: 1234): ").strip()
+        if len(entrada) == LONGITUD_CODIGO and entrada.isdigit():
+            return [int(d) for d in entrada]
+        print(f"  Código no válido. Debe tener exactamente {LONGITUD_CODIGO} dígitos numéricos.")
+
+def comparar_codigo(secreto, intento):
+    """
+    Compara el intento con el código secreto posición por posición.
+    Los dígitos correctos en su posición se incluyen en el resultado,
+    los incorrectos se representan con un guión bajo.
+
+        Args:
+        secreto (list): Código secreto generado por el programa.
+        intento (list): Código ingresado por el usuario.
+
+        Returns:
+            list: Lista con los dígitos correctos en su posición o '_' si es incorrecto.
+    """
+    resultado = []
+    for i in range(LONGITUD_CODIGO):
+        if intento[i] == secreto[i]:
+            resultado.append(str(intento[i]))
+        else:
+            resultado.append("_")
+
+
+
+# === JUEGO REVOLTIJO DE PALABRAS === #
+
+def jugar_revoltijo():
     """Inicia y procesa la lógica del juego 'Revoltijo de Palabras'."""
     palabra = random.choice(PALABRAS_REVOLTIJO)
     palabra_desordenada = desordenar_palabra(palabra)
