@@ -68,19 +68,47 @@ ETAPAS_AHORCADO = [
 ========="""
 ]
 
-PALABRAS = [
-    "python", "computadora", "programa", "teclado", "monitor",
-    "algoritmo", "variable", "funcion", "bucle", "lista",
-    "diccionario", "cadena", "entero", "flotante", "logico",
-    "modulo", "clase", "objeto", "metodo", "herencia",
-    "recursion", "compilador", "interprete", "memoria", "proceso",
-    "archivo", "sistema", "red", "internet", "servidor",
-    "cliente", "base", "dato", "tabla", "consulta"
+PALABRAS_AHORCADO = [
+    "python",
+    "computadora",
+    "programa",
+    "teclado",
+    "monitor",
+    "algoritmo",
+    "variable",
+    "función",
+    "bucle",
+    "lista",
+    "diccionario",
+    "cadena",
+    "entero",
+    "flotante",
+    "lógico",
+    "módulo",
+    "clase",
+    "objeto",
+    "método",
+    "herencia",
+    "recursión",
+    "compilador",
+    "interprete",
+    "memoria",
+    "proceso",
+    "archivo",
+    "sistema",
+    "red",
+    "internet",
+    "servidor",
+    "cliente",
+    "base",
+    "dato",
+    "tabla",
+    "consulta"
     ]
 
 MAX_INTENTOS_AHORCADO = len(ETAPAS_AHORCADO) - 1  # 7 partes del cuerpo
 
-lista_de_palabras = [
+PALABRAS_REVOLTIJO = [
     "barril",
     "bastón",
     "casa",
@@ -185,29 +213,35 @@ def jugar_adivina_numero() -> None:
     """Inicia y procesa la lógica del juego 'Adivina el Número'."""
     pass
 
-def mostrar_estado_ahorcado(intentos_fallidos, letras_usadas, progreso):
-    """
-    Muestra el estado actual del juego de ahorcado.
 
-    Args:
+def mostrar_estado_ahorcado(intentos_fallidos: int, letras_usadas: list, progreso: list, palabra_secreta: list) -> None:
+    """Muestra el estado actual del juego de ahorcado.
+
+    Argumentos:
         intentos_fallidos (int): Cantidad de fallos acumulados.
+
         letras_usadas (list): Lista de letras ya usadas por el jugador.
+
         progreso (list): Lista de caracteres con letras adivinadas y guiones.
+
+        palabra_secreta (list): Lista de caracteres que forman la palabra secreta.
     """
+    limpiar_pantalla()
+    mostrar_titulo("Ahorcado")
+    print(f"  La palabra tiene {len(palabra_secreta)} letras.\n")
     print(ETAPAS_AHORCADO[intentos_fallidos])
     print(f"\n  Palabra: {' '.join(progreso)}")
     print(f"  Letras usadas: {', '.join(sorted(letras_usadas)) if letras_usadas else '-'}")
     print(f"  Intentos fallidos: {intentos_fallidos}/{MAX_INTENTOS_AHORCADO}\n")
 
 
-def obtener_letra_usuario(letras_usadas):
-    """
-    Solicita y valida una letra al usuario (A-Z, ignora mayúsculas).
+def obtener_letra_usuario(letras_usadas: list) -> str:
+    """Solicita y valida una letra al usuario (A-Z, ignora mayúsculas).
 
-    Args:
+    Argumentos:
         letras_usadas (list): Letras ya ingresadas para evitar repeticiones.
 
-    Returns:
+    Devuelve:
         str: Letra válida y no repetida ingresada por el usuario.
     """
     while True:
@@ -221,25 +255,21 @@ def obtener_letra_usuario(letras_usadas):
             print("  Entrada no válida. Ingresa una sola letra.")
 
 
-def jugar_ahorcado():
-    """
-    Juego 'Ahorcado'.
+def jugar_ahorcado() -> None:
+    """Inicia y procesa la lógica del juego 'Ahorcado'.
 
     El programa elige una palabra aleatoria. El jugador adivina letra por letra.
     Dispone de MAX_INTENTOS_AHORCADO fallos antes de perder.
     Al terminar se revela la palabra si no fue adivinada.
     """
-    mostrar_titulo("Ahorcado")
-    palabra_secreta = random.choice(PALABRAS)
+    palabra_secreta = random.choice(PALABRAS_AHORCADO)
     progreso = ["_"] * len(palabra_secreta)
     letras_usadas = []
     intentos_fallidos = 0
     gano = False
 
-    print(f"  La palabra tiene {len(palabra_secreta)} letras.\n")
-
     while intentos_fallidos < MAX_INTENTOS_AHORCADO:
-        mostrar_estado_ahorcado(intentos_fallidos, letras_usadas, progreso)
+        mostrar_estado_ahorcado(intentos_fallidos, letras_usadas, progreso, palabra_secreta)
 
         if "_" not in progreso:
             gano = True
@@ -275,7 +305,7 @@ def jugar_codigo() -> None:
 
 def jugar_revoltijo() -> None:
     """Inicia y procesa la lógica del juego 'Revoltijo de Palabras'."""
-    palabra = random.choice(lista_de_palabras)
+    palabra = random.choice(PALABRAS_REVOLTIJO)
     palabra_desordenada = desordenar_palabra(palabra)
     intentos = 3
     while intentos > 0:
