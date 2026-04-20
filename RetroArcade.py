@@ -251,16 +251,16 @@ def numero_es_incorrecto():
 def sin_intentos():
     global intentos
     if intentos == 0:
-        limpiar_pantalla()
+        limpiar()
         print('==================================================\n            Te quedaste sin intentos.\n                   PERDISTE\n==================================================')
         print('\n¿Qué vas a hacer ahora?\n[1]. Volver a intentarlo.\n[2]. Salir.')
         opcion = input('Respuesta: ')
         if opcion == '1':
-            limpiar_pantalla()
+            limpiar()
             reinicio()
             return adivinar()
         elif opcion == '2':
-            limpiar_pantalla()
+            limpiar()
             reinicio()
             mostrar_menu_principal()
         else:
@@ -268,23 +268,23 @@ def sin_intentos():
 
 
 def adivinar():
-    limpiar_pantalla()
+    limpiar()
     global numero
     print(f'==================================================\nErróneos: {numeros_incorrectos}\nIntentos: {intentos}\n==================================================')
     if intentos == 0:
             sin_intentos()
     numero = int(input('\nDigite un número: '))
     if numero == numero_secreto:
-        limpiar_pantalla()
+        limpiar()
         print(f'Felicidades acertaste el número.\nNúmero secreto: {numero_secreto}')
         print('\n¿Qué vas a hacer ahora?\n[1]. Volver a intentarlo.\n[2]. Salir.')
         opcion = input('Respuesta: ')
         if opcion == '1':
-            limpiar_pantalla()
+            limpiar()
             reinicio()
             return adivinar()
         elif opcion == '2':
-            limpiar_pantalla()
+            limpiar()
             reinicio()
             mostrar_menu_principal()
         else:
@@ -294,17 +294,17 @@ def adivinar():
 
 
 def menu_juego_adivinar():
-    limpiar_pantalla()
+    limpiar()
     print('==================================================\n                ADIVINAR EL NÚMERO\n==================================================')
     print('¡Hola!👋 Vienvenido al mini-juego "Adivinar el número". \nEl juego consiste en intentar adivinar un números en determinados intentos.')
     print('El número puede estar entre el 0 al 100.')
     print('\n¿Listo para comenzar?\n[1]. Comenzar\n[2]. salir')
     opcion = int(input('Respuesta: '))
     if opcion == 1:
-        limpiar_pantalla()
+        limpiar()
         adivinar()
     elif opcion == 2:
-        limpiar_pantalla()
+        limpiar()
         reinicio()
         mostrar_menu_principal()
     else:
@@ -316,7 +316,6 @@ def mostrar_estado_ahorcado(intentos_fallidos: int, letras_usadas: list, progres
     """Muestra el estado actual del juego de ahorcado.
 
     Argumentos:
-<<<<<<< HEAD
         intentos_fallidos (int): Número de intentos fallidos.
         letras_usadas (list): Lista de letras ya utilizadas.
         progreso (list): Lista con el progreso de la palabra secreta.
