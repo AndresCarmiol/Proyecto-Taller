@@ -46,7 +46,7 @@ ETAPAS_AHORCADO = [
   +---+
   |   |
   O   |
- /|\\  |
+ /|\  |
       |
       |
 =========""",
@@ -54,7 +54,7 @@ ETAPAS_AHORCADO = [
   +---+
   |   |
   O   |
- /|\\  |
+ /|\  |
  /    |
       |
 =========""",
@@ -62,8 +62,8 @@ ETAPAS_AHORCADO = [
   +---+
   |   |
   O   |
- /|\\  |
- / \\  |
+ /|\  |
+ / \  |
       |
 ========="""
 ]
@@ -189,7 +189,7 @@ def ejecutar_menu() -> None:
 
         if opcion == "1":
             limpiar()
-            jugar_adivina_numero()
+            jugar_adivinar_numero()
             presionar_enter()
         elif opcion == "2":
             limpiar()
@@ -213,16 +213,13 @@ def ejecutar_menu() -> None:
 
 # === JUEGO ADIVINA EL NUMERO === #
 
-def jugar_adivina_numero() -> None:
-    """Inicia y procesa la lógica del juego 'Adivina el Número'."""
-    pass
-
 
 def reinicio():
     global numero_secreto, numeros_incorrectos, intentos
     numero_secreto =  random.randint(0, 101)
     numeros_incorrectos = []
     intentos = 6
+
 
 def numero_es_incorrecto():
     global numero
@@ -293,7 +290,8 @@ def adivinar():
             numero_es_incorrecto()
 
 
-def menu_juego_adivinar():
+def jugar_adivinar_numero():
+    """Inicia y procesa la lógica del juego 'Adivina el Número'."""
     limpiar()
     print('==================================================\n                ADIVINAR EL NÚMERO\n==================================================')
     print('¡Hola!👋 Vienvenido al mini-juego "Adivinar el número". \nEl juego consiste en intentar adivinar un números en determinados intentos.')
@@ -310,111 +308,12 @@ def menu_juego_adivinar():
     else:
         print('No es un valor valido')
 
+# === JUEGO AHORCADO === #
+
 def mostrar_estado_ahorcado(intentos_fallidos: int, letras_usadas: list, progreso: list, palabra_secreta: list) -> None:
     """Muestra el estado actual del juego de ahorcado.
 
     Argumentos:
-        intentos_fallidos (int): Número de intentos fallidos.
-        letras_usadas (list): Lista de letras ya utilizadas.
-        progreso (list): Lista con el progreso de la palabra secreta.
-        palabra_secreta (list): Lista con las letras de la palabra secreta.
-    """
-    pass
-
-def reinicio():
-    global numero_secreto, numeros_incorrectos, intentos
-    numero_secreto =  random.randint(0, 101)
-    numeros_incorrectos = []
-    intentos = 6
-
-    def numero_es_incorrecto():
-       global numero
-       global intentos
-       if numero > 100 or numero < 0:
-            print('\n-El valor del número está entre 0 y 100-\n')
-            input('-Pulse ENTER para volver a adivinar-')
-            return adivinar()
-       if numero not in numeros_incorrectos:
-            if numero <= 100:
-                if numero < numero_secreto:
-                    print('Más alto')
-                elif numero > numero_secreto:
-                    print('Más bajo')
-                print(f'El {numero} no es el número secreto\n')
-                intentos -= 1
-                numeros_incorrectos.append(numero)
-                input('-Pulsa ENTER para volver a adivinar\n')
-                return adivinar()
-       else:
-             print('\nYa intentaste ese valor.\n')
-             input('-Pulsa enter para volver a adivinar-')
-             return adivinar()
-    def sin_intentos():
-        global intentos
-        if intentos == 0:
-            limpiar()
-            print('==================================================\n            Te quedaste sin intentos.\n                   PERDISTE\n==================================================')
-            print('\n¿Qué vas a hacer ahora?\n[1]. Volver a intentarlo.\n[2]. Salir.')
-            opcion = input('Respuesta: ')
-            if opcion == '1':
-                limpiar()
-                reinicio()
-                return adivinar()
-            elif opcion == '2':
-                limpiar()
-                reinicio()
-                mostrar_menu_principal()
-            else:
-                print('No es una opcion valida.')
-    def adivinar():
-        limpiar()
-        global numero
-        print(f'==================================================\nErróneos: {numeros_incorrectos}\nIntentos: {intentos}\n==================================================')
-        if intentos == 0:
-             sin_intentos()
-        numero = int(input('\nDigite un número: '))
-        if numero == numero_secreto:
-            limpiar()
-            print(f'Felicidades acertaste el número.\nNúmero secreto: {numero_secreto}')
-            print('\n¿Qué vas a hacer ahora?\n[1]. Volver a intentarlo.\n[2]. Salir.')
-            opcion = input('Respuesta: ')
-            if opcion == '1':
-                limpiar()
-                reinicio()
-                return adivinar()
-            elif opcion == '2':
-                limpiar()
-                reinicio()
-                mostrar_menu_principal()
-            else:
-                print('No es una opcion valida.')
-        else:
-             numero_es_incorrecto()
-    def menu_juego_adivinar():
-        limpiar()
-        print('==================================================\n                ADIVINAR EL NÚMERO\n==================================================')
-        print('¡Hola!👋 Vienvenido al mini-juego "Adivinar el número". \nEl juego consiste en intentar adivinar un números en determinados intentos.')
-        print('El número puede estar entre el 0 al 100.')
-        print('\n¿Listo para comenzar?\n[1]. Comenzar\n[2]. salir')
-        opcion = int(input('Respuesta: '))
-        if opcion == 1:
-            limpiar()
-            adivinar()
-        elif opcion == 2:
-            limpiar()
-            reinicio()
-            mostrar_menu_principal()
-        else:
-            print('No es un valor valido')
-
-
-
-# === JUEGO AHORCADO === #
-
-def mostrar_estado_ahorcado(intentos_fallidos, letras_usadas, progreso, palabra_secreta):
-    """
-    Muestra el estado actual del juego de ahorcado.
-    Args:
         intentos_fallidos (int): Cantidad de fallos acumulados.
 
         letras_usadas (list): Lista de letras ya usadas por el jugador.
