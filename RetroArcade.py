@@ -223,12 +223,17 @@ def jugar_adivina_numero() -> None:
 def mostrar_estado_ahorcado(intentos_fallidos: int, letras_usadas: list, progreso: list, palabra_secreta: list) -> None:
     """Muestra el estado actual del juego de ahorcado.
 
-<<<<<<< Updated upstream
     Argumentos:
-=======
-    def reinicio():
-        global numero_secreto, numeros_incorrectos, intentos
-        numero_secreto =  random.randint(0, 101)
+        intentos_fallidos (int): Número de intentos fallidos.
+        letras_usadas (list): Lista de letras ya utilizadas.
+        progreso (list): Lista con el progreso de la palabra secreta.
+        palabra_secreta (list): Lista con las letras de la palabra secreta.
+    """
+    pass
+
+def reinicio():
+    global numero_secreto, numeros_incorrectos, intentos
+    numero_secreto =  random.randint(0, 101)
         numeros_incorrectos = []
         intentos = 6
 
@@ -319,9 +324,7 @@ def mostrar_estado_ahorcado(intentos_fallidos: int, letras_usadas: list, progres
 def mostrar_estado_ahorcado(intentos_fallidos, letras_usadas, progreso):
     """
     Muestra el estado actual del juego de ahorcado.
-
     Args:
->>>>>>> Stashed changes
         intentos_fallidos (int): Cantidad de fallos acumulados.
 
         letras_usadas (list): Lista de letras ya usadas por el jugador.
