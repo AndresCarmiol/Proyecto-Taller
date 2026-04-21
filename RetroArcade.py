@@ -213,10 +213,19 @@ def ejecutar_menu() -> None:
 
 # === JUEGO ADIVINA EL NUMERO === #
 
+numero_secreto =  random.randint(1, 100)
+numeros_incorrectos = []
+intentos = 6
+
+def no_es_un_numero():
+    limpiar()
+    print('\n==================================================\n              No es un número entero\n==================================================\n')
+    input('\n-Pulsa ENTER para continuar-\n')
+    return adivinar()
 
 def reinicio():
     global numero_secreto, numeros_incorrectos, intentos
-    numero_secreto =  random.randint(0, 101)
+    numero_secreto =  random.randint(1, 100)
     numeros_incorrectos = []
     intentos = 6
 
@@ -224,25 +233,31 @@ def reinicio():
 def numero_es_incorrecto():
     global numero
     global intentos
-    if numero > 100 or numero < 0:
-        print('\n-El valor del número está entre 0 y 100-\n')
-        input('-Pulse ENTER para volver a adivinar-')
-        return adivinar()
-    if numero not in numeros_incorrectos:
-        if numero <= 100:
-            if numero < numero_secreto:
-                print('Más alto')
-            elif numero > numero_secreto:
-                print('Más bajo')
-            print(f'El {numero} no es el número secreto\n')
-            intentos -= 1
-            numeros_incorrectos.append(numero)
-            input('-Pulsa ENTER para volver a adivinar\n')
-            return adivinar()
+    if numero.isdigit() == False:
+            no_es_un_numero()
     else:
-            print('\nYa intentaste ese valor.\n')
-            input('-Pulsa enter para volver a adivinar-')
+         numero = int(numero)
+         if numero > 100 or numero < 1:
+            limpiar()
+            print('\n==================================================\n     El valor del número está entre 1 y 100\n==================================================\n')
+            input('-Pulse ENTER para volver a adivinar-')
             return adivinar()
+         if numero not in numeros_incorrectos:
+            if numero <= 100:
+                if numero < numero_secreto:
+                    limpiar()
+                    print(f'\n==================================================\n                     Más alto\n            El {numero} no es el número secreto\n==================================================')
+                elif numero > numero_secreto:
+                    limpiar()
+                    print(f'\n==================================================\n                     Más bajo\n            El {numero} no es el número secreto\n==================================================')
+                intentos -= 1
+                numeros_incorrectos.append(numero)
+                input('\n-Pulsa ENTER para volver a adivinar-\n')
+                return adivinar()
+         else:
+                print('\n==================================================\n            Ya intentaste ese valor.\n==================================================\n')
+                input('-Pulsa enter para volver a adivinar-\n')
+                return adivinar()
 
 
 def sin_intentos():
@@ -261,7 +276,11 @@ def sin_intentos():
             reinicio()
             mostrar_menu_principal()
         else:
-            print('No es una opcion valida.')
+            reinicio()
+            limpiar()
+            print('==================================================\n No es un opción valida... Redirigiendo al menú.\n==================================================')
+            input('\n-Pulsa ENTER para continuar-\n')
+            jugar_adivinar_numero()
 
 
 def adivinar():
@@ -270,10 +289,12 @@ def adivinar():
     mostrar_titulo(f"Erróneos: {numeros_incorrectos}\nIntentos: {intentos}")
     if intentos == 0:
             sin_intentos()
-    numero = int(input('\nDigite un número: '))
+    numero = input('\nDigite un número: ')
+    if numero.isdigit() == True:
+        numero = int(numero)
     if numero == numero_secreto:
         limpiar()
-        print(f'Felicidades acertaste el número.\nNúmero secreto: {numero_secreto}')
+        print(f'==================================================\nFelicidades acertaste el número.\nNúmero secreto: {numero_secreto}\n==================================================')
         print('\n¿Qué vas a hacer ahora?\n[1]. Volver a intentarlo.\n[2]. Salir.')
         opcion = input('Respuesta: ')
         if opcion == '1':
@@ -285,8 +306,12 @@ def adivinar():
             reinicio()
             mostrar_menu_principal()
         else:
-            print('No es una opcion valida.')
+            limpiar()
+            print('==================================================\n No es un opción valida... Redirigiendo al menú.\n==================================================')
+            input('\n-Pulsa ENTER para continuar-\n')
+            jugar_adivinar_numero()
     else:
+        
             numero_es_incorrecto()
 
 
@@ -295,7 +320,7 @@ def jugar_adivinar_numero():
     limpiar()
     mostrar_titulo("ADIVINAR EL NÚMERO")
     print('¡Hola!👋 Vienvenido al mini-juego "Adivinar el número". \nEl juego consiste en intentar adivinar un números en determinados intentos.')
-    print('El número puede estar entre el 0 al 100.')
+    print('El número puede estar entre el 1 al 100.')
     print('\n¿Listo para comenzar?\n[1]. Comenzar\n[2]. salir')
     opcion = int(input('Respuesta: '))
     if opcion == 1:
@@ -306,7 +331,10 @@ def jugar_adivinar_numero():
         reinicio()
         mostrar_menu_principal()
     else:
-        print('No es un valor valido')
+        limpiar()
+        print('==================================================\n              No es un opción valida\n==================================================')
+        input('\n-Pulsa ENTER para volver-\n')
+        jugar_adivinar_numero()
 
 # === JUEGO AHORCADO === #
 
