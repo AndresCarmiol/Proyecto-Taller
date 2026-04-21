@@ -312,14 +312,10 @@ def jugar_adivinar_numero():
 
 def mostrar_estado_ahorcado(intentos_fallidos: int, letras_usadas: list, progreso: list, palabra_secreta: str) -> None:
     """Muestra el estado actual del juego de ahorcado.
-
     Argumentos:
         intentos_fallidos (int): Cantidad de fallos acumulados.
-
         letras_usadas (list): Lista de letras ya usadas por el jugador.
-
         progreso (list): Lista de caracteres con letras adivinadas y guiones.
-
         palabra_secreta (str): Cadena de caracteres que representa la palabra secreta.
     """
     limpiar()
@@ -333,10 +329,8 @@ def mostrar_estado_ahorcado(intentos_fallidos: int, letras_usadas: list, progres
 
 def obtener_letra_usuario(letras_usadas: list) -> str:
     """Solicita y valida una letra al usuario (A-Z, ignora mayúsculas).
-
     Argumentos:
         letras_usadas (list): Letras ya ingresadas para evitar repeticiones.
-
     Retorna:
         str: Letra válida y no repetida ingresada por el usuario.
     """
@@ -353,7 +347,6 @@ def obtener_letra_usuario(letras_usadas: list) -> str:
 
 def jugar_ahorcado() -> None:
     """Inicia y procesa la lógica del juego 'Ahorcado'.
-
     El programa elige una palabra aleatoria. El jugador adivina letra por letra.
     Dispone de MAX_INTENTOS_AHORCADO fallos antes de perder.
     Al terminar se revela la palabra si no fue adivinada.
@@ -395,10 +388,51 @@ def jugar_ahorcado() -> None:
 
 # === JUEGO CODIGO === # 
 
-def jugar_codigo():
-     """
-    Juego 'Código'
+def generar_codigo_secreto():
+    """
+    Genera un código secreto de LONGITUD_CODIGO dígitos aleatorios (0-9).
+    Returns:
+        list: Lista de enteros que representan el código secreto.
+    """
+    return [random.randint(0, 9) for _ in range(LONGITUD_CODIGO)]
  
+ 
+def obtener_codigo_usuario():
+    """
+    Pide y valida un código de LONGITUD_CODIGO dígitos al usuario.
+    Repite la solicitud hasta recibir una entrada válida.
+    Returns:
+        list: Lista de enteros ingresados por el usuario.
+    """
+    while True:
+        entrada = input(f"  Ingresa un código de {LONGITUD_CODIGO} dígitos (ej: 1234): ").strip()
+        if len(entrada) == LONGITUD_CODIGO and entrada.isdigit():
+            return [int(d) for d in entrada]
+        print(f"  Código no válido. Debe tener exactamente {LONGITUD_CODIGO} dígitos numéricos.")
+ 
+ 
+def comparar_codigo(secreto, intento):
+    """
+    Compara el intento con el código secreto posición por posición.
+    Los dígitos correctos en su posición se incluyen en el resultado,
+    los incorrectos se representan con un guión bajo.
+    Args:
+        secreto (list): Código secreto generado por el programa.
+        intento (list): Código ingresado por el usuario.
+    Returns:
+        list: Lista con los dígitos correctos en su posición o '_' si es incorrecto.
+    """
+    resultado = []
+    for i in range(LONGITUD_CODIGO):
+        if intento[i] == secreto[i]:
+            resultado.append(str(intento[i]))
+        else:
+            resultado.append("_")
+    return resultado
+ 
+ 
+def jugar_codigo():
+    """
     El programa genera un código de 4 dígitos, el jugador adivina dígito
     a dígito, los dígitos correctos en su posición se revelan después de cada
     intento, tiene MAX_INTENTOS_CODIGO intentos antes de perder.
@@ -422,9 +456,8 @@ def jugar_codigo():
  
         intento = obtener_codigo_usuario()
         intentos_usados += 1
-        resultado = evaluar_codigo(codigo_secreto, intento)
+        resultado = comparar_codigo(codigo_secreto, intento)
  
-        # Actualizar progreso con los aciertos nuevos
         for i in range(LONGITUD_CODIGO):
             if resultado[i] != "_":
                 progreso[i] = resultado[i]
@@ -441,49 +474,6 @@ def jugar_codigo():
     else:
         print(f"  ¡Perdiste! El código era: {''.join(str(d) for d in codigo_secreto)}")
 
-def generar_codigo_secreto():
-    """Genera un código secreto de LONGITUD_CODIGO dígitos aleatorios (0-9).
-
-    Returns:
-        list: Lista de enteros que representan el código secreto.
-    """
-    return [random.randint(0, 9) for _ in range(LONGITUD_CODIGO)]
-
-
-def obtener_codigo_usuario():
-    """
-    Solicita y valida un código de LONGITUD_CODIGO dígitos al usuario.
-    Repite la solicitud hasta recibir una entrada válida.
-
-    Returns:
-        list: Lista de enteros ingresados por el usuario.
-    """
-    while True:
-        entrada = input(f"  Ingresa un código de {LONGITUD_CODIGO} dígitos (ej: 1234): ").strip()
-        if len(entrada) == LONGITUD_CODIGO and entrada.isdigit():
-            return [int(d) for d in entrada]
-        print(f"  Código no válido. Debe tener exactamente {LONGITUD_CODIGO} dígitos numéricos.")
-
-
-def comparar_codigo(secreto, intento):
-    """
-    Compara el intento con el código secreto posición por posición.
-    Los dígitos correctos en su posición se incluyen en el resultado,
-    los incorrectos se representan con un guión bajo.
-
-        Args:
-        secreto (list): Código secreto generado por el programa.
-        intento (list): Código ingresado por el usuario.
-
-        Returns:
-            list: Lista con los dígitos correctos en su posición o '_' si es incorrecto.
-    """
-    resultado = []
-    for i in range(LONGITUD_CODIGO):
-        if intento[i] == secreto[i]:
-            resultado.append(str(intento[i]))
-        else:
-            resultado.append("_")
 
 # === JUEGO REVOLTIJO DE PALABRAS === #
 
