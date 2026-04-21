@@ -106,11 +106,6 @@ PALABRAS_AHORCADO = [
     "consulta"
     ]
 
-MAX_INTENTOS_AHORCADO = len(ETAPAS_AHORCADO) - 1  # 7 partes del cuerpo
-
-LONGITUD_CODIGO = 4
-MAX_INTENTOS_CODIGO = 7
-
 PALABRAS_REVOLTIJO = [
     "barril",
     "bastón",
@@ -141,6 +136,15 @@ PALABRAS_REVOLTIJO = [
     "ritmo",
 ]
 
+MAX_INTENTOS_AHORCADO = len(ETAPAS_AHORCADO) - 1  # 7 partes del cuerpo
+
+LONGITUD_CODIGO = 4
+MAX_INTENTOS_CODIGO = 7
+
+numero_secreto = random.randint(1, 100)
+numeros_incorrectos = []
+intentos = 6
+
 
 def limpiar() -> None:
     """Limpia la consola."""
@@ -148,14 +152,14 @@ def limpiar() -> None:
 
 
 def mostrar_titulo(titulo: str) -> None:
-    """Escribe el título especificado y lo rodea con dos lineas decorativas de símbolos.
+    """Escribe el título especificado en mayúsculas y lo rodea con dos lineas decorativas de símbolos.
     
     Argumentos:
         titulo (str): Texto que se mostrará como título.
     """
     linea = "=" * 50
     print(f"\n{linea}")
-    print(f"   {titulo.upper()}")
+    print(f"   {titulo.upper().center(44)}")
     print(f"{linea}\n")
 
 
@@ -213,14 +217,6 @@ def ejecutar_menu() -> None:
 
 # === JUEGO ADIVINA EL NUMERO === #
 
-def limpiar():
-    """Limpia la pantalla de la consola."""
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-def mostrar_titulo(texto):
-    """Muestra un título formateado."""
-    print(f'\n==================================================\n{texto.center(44)}\n==================================================')
-
 def mostrar_menu():
     """Muestra el menú principal del juego."""
     limpiar()
@@ -239,10 +235,6 @@ def mostrar_menu():
         input('\n-Pulsa ENTER para continuar-\n')
         mostrar_menu_principal()
 
-# Variables globales
-numero_secreto = random.randint(1, 100)
-numeros_incorrectos = []
-intentos = 6
 
 def reinicio():
     """Reinicia las variables del juego."""
@@ -251,12 +243,14 @@ def reinicio():
     numeros_incorrectos = []
     intentos = 6
 
+
 def no_es_un_numero():
     """Maneja cuando el usuario no ingresa un número."""
     limpiar()
     print('\n==================================================\n              No es un número entero\n==================================================\n')
     input('\n-Pulsa ENTER para continuar-\n')
     return adivinar()
+
 
 def numero_es_incorrecto(numero):
     """Procesa cuando el número ingresado es incorrecto."""
@@ -285,6 +279,7 @@ def numero_es_incorrecto(numero):
         input('-Pulsa enter para volver a adivinar-\n')
         return adivinar()
 
+
 def sin_intentos():
     """Maneja cuando el jugador se queda sin intentos."""
     global intentos
@@ -306,6 +301,7 @@ def sin_intentos():
         print('==================================================\n     No es una opción válida\n==================================================')
         input('\n-Pulsa ENTER para continuar-\n')
         sin_intentos()
+
 
 def adivinar():
     """Función principal del juego para adivinar el número."""
@@ -349,6 +345,7 @@ def adivinar():
             adivinar()
     else:
         numero_es_incorrecto(numero)
+
 
 def jugar_adivinar_numero():
     """Inicia y procesa la lógica del juego 'Adivina el Número'."""
@@ -540,7 +537,6 @@ def jugar_codigo():
     else:
         print(f"  ¡Perdiste! El código era: {''.join(str(d) for d in codigo_secreto)}")
 
-
 # === JUEGO REVOLTIJO DE PALABRAS === #
 
 def jugar_revoltijo() -> None:
@@ -554,8 +550,12 @@ def jugar_revoltijo() -> None:
         if respuesta == palabra:
             print("\n🎊🎉🎈 ¡Felicitaciones, adivinaste la palabra! 🎈🎉🎊")
             return
-        intentos -= 1
-        if intentos > 0:
+        if respuesta == "":
+            print("\n🔘 Respuesta vacía, no se consumieron intentos... 🔘")
+            input()
+        else:
+            intentos -= 1
+        if intentos > 0 and respuesta != "":
             print("\n❌ Incorrecto, intentalo de nuevo... ❌")
             input()
     actualizar_revoltijo(palabra_desordenada, intentos)
