@@ -395,10 +395,51 @@ def jugar_ahorcado() -> None:
 
 # === JUEGO CODIGO === # 
 
-def jugar_codigo() -> None:
-    """Inicia y procesa la lógica del juego 'Código'."""
-    pass
-
+def jugar_codigo():
+     """
+    Juego 'Código'
+ 
+    El programa genera un código de 4 dígitos, el jugador adivina dígito
+    a dígito, los dígitos correctos en su posición se revelan después de cada
+    intento, tiene MAX_INTENTOS_CODIGO intentos antes de perder.
+    Al terminar se revela el código si no fue adivinado.
+    """
+    print("\n" + "=" * 50)
+    print("   CÓDIGO")
+    print("=" * 50 + "\n")
+ 
+    codigo_secreto = generar_codigo_secreto()
+    progreso = ["_"] * LONGITUD_CODIGO
+    intentos_usados = 0
+    gano = False
+ 
+    print(f"  He generado un código de {LONGITUD_CODIGO} dígitos.")
+    print(f"  Tienes {MAX_INTENTOS_CODIGO} intentos.\n")
+ 
+    while intentos_usados < MAX_INTENTOS_CODIGO:
+        print(f"  Código actual:      {' '.join(progreso)}")
+        print(f"  Intentos restantes: {MAX_INTENTOS_CODIGO - intentos_usados}\n")
+ 
+        intento = obtener_codigo_usuario()
+        intentos_usados += 1
+        resultado = evaluar_codigo(codigo_secreto, intento)
+ 
+        # Actualizar progreso con los aciertos nuevos
+        for i in range(LONGITUD_CODIGO):
+            if resultado[i] != "_":
+                progreso[i] = resultado[i]
+ 
+        aciertos = sum(1 for r in resultado if r != "_")
+        print(f"\n  Resultado: {' '.join(resultado)}  ({aciertos} acierto(s) en posición correcta)\n")
+ 
+        if "_" not in progreso:
+            gano = True
+            break
+ 
+    if gano:
+        print(f"  ¡Ganaste! El código era: {''.join(str(d) for d in codigo_secreto)}")
+    else:
+        print(f"  ¡Perdiste! El código era: {''.join(str(d) for d in codigo_secreto)}")
 
 def generar_codigo_secreto():
     """
