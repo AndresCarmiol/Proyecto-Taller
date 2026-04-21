@@ -167,7 +167,7 @@ def presionar_enter() -> None:
 def mostrar_menu_principal() -> str:
     """Muestra la lista de opciones del menu principal.
 
-    Devuelve:
+    Retorna:
         str: El texto escrito por el usuario
     """
     mostrar_titulo("Retro Arcade")
@@ -249,7 +249,7 @@ def sin_intentos():
     global intentos
     if intentos == 0:
         limpiar()
-        print('==================================================\n            Te quedaste sin intentos.\n                   PERDISTE\n==================================================')
+        mostrar_titulo("Te quedaste sin intentos")
         print('\n¿Qué vas a hacer ahora?\n[1]. Volver a intentarlo.\n[2]. Salir.')
         opcion = input('Respuesta: ')
         if opcion == '1':
@@ -267,7 +267,7 @@ def sin_intentos():
 def adivinar():
     limpiar()
     global numero
-    print(f'==================================================\nErróneos: {numeros_incorrectos}\nIntentos: {intentos}\n==================================================')
+    mostrar_titulo(f"Erróneos: {numeros_incorrectos}\nIntentos: {intentos}")
     if intentos == 0:
             sin_intentos()
     numero = int(input('\nDigite un número: '))
@@ -293,7 +293,7 @@ def adivinar():
 def jugar_adivinar_numero():
     """Inicia y procesa la lógica del juego 'Adivina el Número'."""
     limpiar()
-    print('==================================================\n                ADIVINAR EL NÚMERO\n==================================================')
+    mostrar_titulo("ADIVINAR EL NÚMERO")
     print('¡Hola!👋 Vienvenido al mini-juego "Adivinar el número". \nEl juego consiste en intentar adivinar un números en determinados intentos.')
     print('El número puede estar entre el 0 al 100.')
     print('\n¿Listo para comenzar?\n[1]. Comenzar\n[2]. salir')
@@ -337,7 +337,7 @@ def obtener_letra_usuario(letras_usadas: list) -> str:
     Argumentos:
         letras_usadas (list): Letras ya ingresadas para evitar repeticiones.
 
-    Devuelve:
+    Retorna:
         str: Letra válida y no repetida ingresada por el usuario.
     """
     while True:
@@ -442,8 +442,7 @@ def jugar_codigo():
         print(f"  ¡Perdiste! El código era: {''.join(str(d) for d in codigo_secreto)}")
 
 def generar_codigo_secreto():
-    """
-    Genera un código secreto de LONGITUD_CODIGO dígitos aleatorios (0-9).
+    """Genera un código secreto de LONGITUD_CODIGO dígitos aleatorios (0-9).
 
     Returns:
         list: Lista de enteros que representan el código secreto.
@@ -516,7 +515,7 @@ def desordenar_palabra(palabra: str) -> str:
     Argumentos:
         palabra (str): Palabra por desordenar.
     
-    Devuelve:
+    Retorna:
         str: La palabra desordenada.
     """
     lista_temporal = list(palabra)
@@ -543,6 +542,5 @@ def actualizar_revoltijo(palabra_desordenada: str, intentos: str) -> None:
 
 
 # ============================================================================================= #
-
 
 ejecutar_menu()
