@@ -236,7 +236,7 @@ def mostrar_menu():
         mostrar_menu_principal()
 
 
-def reinicio():
+def reinicio() -> None:
     """Reinicia las variables del juego."""
     global numero_secreto, numeros_incorrectos, intentos
     numero_secreto = random.randint(1, 100)
@@ -244,7 +244,7 @@ def reinicio():
     intentos = 6
 
 
-def no_es_un_numero():
+def no_es_un_numero() -> function:
     """Maneja cuando el usuario no ingresa un número."""
     limpiar()
     print('\n==================================================\n              No es un número entero\n==================================================\n')
@@ -252,7 +252,7 @@ def no_es_un_numero():
     return adivinar()
 
 
-def numero_es_incorrecto(numero):
+def numero_es_incorrecto(numero) -> function:
     """Procesa cuando el número ingresado es incorrecto."""
     global intentos, numeros_incorrectos
     
@@ -280,7 +280,7 @@ def numero_es_incorrecto(numero):
         return adivinar()
 
 
-def sin_intentos():
+def sin_intentos() -> function:
     """Maneja cuando el jugador se queda sin intentos."""
     global intentos
     limpiar()
@@ -303,7 +303,7 @@ def sin_intentos():
         sin_intentos()
 
 
-def adivinar():
+def adivinar() -> None:
     """Función principal del juego para adivinar el número."""
     limpiar()
     global intentos, numero_secreto
@@ -347,7 +347,7 @@ def adivinar():
         numero_es_incorrecto(numero)
 
 
-def jugar_adivinar_numero():
+def jugar_adivinar_numero() -> None:
     """Inicia y procesa la lógica del juego 'Adivina el Número'."""
     limpiar()
     mostrar_titulo("ADIVINAR EL NÚMERO")
@@ -451,20 +451,19 @@ def jugar_ahorcado() -> None:
 
 # === JUEGO CODIGO === # 
 
-def generar_codigo_secreto():
-    """
-    Genera un código secreto de LONGITUD_CODIGO dígitos aleatorios (0-9).
-    Returns:
+def generar_codigo_secreto() -> list:
+    """Genera un código secreto de LONGITUD_CODIGO dígitos aleatorios (0-9).
+    
+    Retorna:
         list: Lista de enteros que representan el código secreto.
     """
     return [random.randint(0, 9) for _ in range(LONGITUD_CODIGO)]
  
  
-def obtener_codigo_usuario():
-    """
-    Pide y valida un código de LONGITUD_CODIGO dígitos al usuario.
-    Repite la solicitud hasta recibir una entrada válida.
-    Returns:
+def obtener_codigo_usuario() -> list:
+    """Pide y valida un código de LONGITUD_CODIGO dígitos al usuario. Repite la solicitud hasta recibir una entrada válida.
+
+    Retorna:
         list: Lista de enteros ingresados por el usuario.
     """
     while True:
@@ -474,7 +473,7 @@ def obtener_codigo_usuario():
         print(f"  Código no válido. Debe tener exactamente {LONGITUD_CODIGO} dígitos numéricos.")
  
  
-def comparar_codigo(secreto, intento):
+def comparar_codigo(secreto: list, intento: list) -> list:
     """
     Compara el intento con el código secreto posición por posición.
     Los dígitos correctos en su posición se incluyen en el resultado,
@@ -482,7 +481,7 @@ def comparar_codigo(secreto, intento):
     Args:
         secreto (list): Código secreto generado por el programa.
         intento (list): Código ingresado por el usuario.
-    Returns:
+    Retorna:
         list: Lista con los dígitos correctos en su posición o '_' si es incorrecto.
     """
     resultado = []
@@ -494,7 +493,7 @@ def comparar_codigo(secreto, intento):
     return resultado
  
  
-def jugar_codigo():
+def jugar_codigo() -> None:
     """
     El programa genera un código de 4 dígitos, el jugador adivina dígito
     a dígito, los dígitos correctos en su posición se revelan después de cada
